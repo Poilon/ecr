@@ -11,163 +11,275 @@
       <p class="eyebrow">Questionnaire ECR</p>
       <h1>Mesure ta dépendance affective</h1>
       <p>
-        Ce quiz inspiré de l'ECR (Expériences dans les Relations de Couple) te permet de voir comment tu te représentes mentalement les personnes importantes et d'évaluer ton niveau de dépendance affective. Choisis la réponse qui décrit le mieux ta manière habituelle d'être en lien.
+        Réponds à 8 affirmations, une à la fois. Chaque réponse est notée de 1 à 4 et ton score final situe ton niveau de dépendance affective et ta manière de te représenter les personnes importantes.
       </p>
     </header>
 
     <main class="grid">
-      <section class="card intro">
-        <h2>Comment répondre&nbsp;?</h2>
-        <p>
-          Utilise l'échelle suivante pour chaque affirmation&nbsp;:
-        </p>
-        <ul class="scale">
-          <li><span>1</span> Rarement vrai</li>
-          <li><span>2</span> Parfois vrai</li>
-          <li><span>3</span> Souvent vrai</li>
-          <li><span>4</span> Presque toujours vrai</li>
-        </ul>
-        <p>
-          Additionne ensuite les points de toutes les questions pour situer ton style relationnel.
-        </p>
-      </section>
-
-      <section class="card question">
-        <header>
-          <p class="eyebrow">1</p>
-          <h2>Je me sens en sécurité quand mes proches sont physiquement ou émotionnellement proches de moi.</h2>
-        </header>
-        <div class="options">
-          <label><input type="radio" name="q1" value="1" /><span>1</span></label>
-          <label><input type="radio" name="q1" value="2" /><span>2</span></label>
-          <label><input type="radio" name="q1" value="3" /><span>3</span></label>
-          <label><input type="radio" name="q1" value="4" /><span>4</span></label>
+      <section class="card intro" id="introCard">
+        <h2>Comment ça marche&nbsp;?</h2>
+        <p>Avance question par question. Le score se calcule automatiquement et tu obtiens une lecture précise des conséquences et des actions ciblées.</p>
+        <div class="key">
+          <div class="key-item"><span>1</span> Rarement vrai</div>
+          <div class="key-item"><span>2</span> Parfois vrai</div>
+          <div class="key-item"><span>3</span> Souvent vrai</div>
+          <div class="key-item"><span>4</span> Presque toujours vrai</div>
         </div>
-        <p class="micro">Cette question mesure ton besoin de proximité pour te rassurer.</p>
+        <button class="btn primary" id="startBtn" type="button">Lancer le quiz</button>
       </section>
 
-      <section class="card question">
-        <header>
-          <p class="eyebrow">2</p>
-          <h2>Je crains souvent qu'on m'abandonne quand quelqu'un ne répond pas rapidement.</h2>
-        </header>
-        <div class="options">
-          <label><input type="radio" name="q2" value="1" /><span>1</span></label>
-          <label><input type="radio" name="q2" value="2" /><span>2</span></label>
-          <label><input type="radio" name="q2" value="3" /><span>3</span></label>
-          <label><input type="radio" name="q2" value="4" /><span>4</span></label>
+      <section class="card question" id="quizCard" hidden>
+        <div class="progress">
+          <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+          <span class="progress-label" id="progressLabel">Question 1/8</span>
         </div>
-        <p class="micro">Les personnes dépendantes surévaluent les signes de distance ou de silence.</p>
-      </section>
-
-      <section class="card question">
-        <header>
-          <p class="eyebrow">3</p>
-          <h2>Je reformule mentalement chaque interaction pour vérifier si j'ai blessé l'autre.</h2>
-        </header>
-        <div class="options">
-          <label><input type="radio" name="q3" value="1" /><span>1</span></label>
-          <label><input type="radio" name="q3" value="2" /><span>2</span></label>
-          <label><input type="radio" name="q3" value="3" /><span>3</span></label>
-          <label><input type="radio" name="q3" value="4" /><span>4</span></label>
+        <p class="eyebrow" id="questionNumber">Question 1</p>
+        <h2 id="questionText"></h2>
+        <p class="micro" id="questionHint"></p>
+        <div class="options" id="options"></div>
+        <div class="actions">
+          <button class="btn ghost" id="prevBtn" type="button">Précédent</button>
+          <button class="btn primary" id="nextBtn" type="button" disabled>Question suivante</button>
         </div>
-        <p class="micro">Cela renvoie à des représentations internalisées anxieuses.</p>
       </section>
 
-      <section class="card question">
-        <header>
-          <p class="eyebrow">4</p>
-          <h2>Je me sens incomplet·e sans approbation explicite de ceux que j'aime.</h2>
-        </header>
-        <div class="options">
-          <label><input type="radio" name="q4" value="1" /><span>1</span></label>
-          <label><input type="radio" name="q4" value="2" /><span>2</span></label>
-          <label><input type="radio" name="q4" value="3" /><span>3</span></label>
-          <label><input type="radio" name="q4" value="4" /><span>4</span></label>
+      <section class="card results" id="resultCard" hidden>
+        <p class="eyebrow">Résultat</p>
+        <h2>Ton analyse personnalisée</h2>
+        <div class="score-box">
+          <div class="score-main">
+            <span class="label">Score</span>
+            <div class="value"><span id="scoreValue">0</span>/<span id="scoreMax">32</span></div>
+          </div>
+          <div class="badge" id="scoreBadge">Base sécure</div>
         </div>
-        <p class="micro">Tu explores ici la régulation de l'estime personnelle via l'autre.</p>
-      </section>
-
-      <section class="card question">
-        <header>
-          <p class="eyebrow">5</p>
-          <h2>Quand je sens la distance monter, je multiplie les messages ou les preuves d'amour.</h2>
-        </header>
-        <div class="options">
-          <label><input type="radio" name="q5" value="1" /><span>1</span></label>
-          <label><input type="radio" name="q5" value="2" /><span>2</span></label>
-          <label><input type="radio" name="q5" value="3" /><span>3</span></label>
-          <label><input type="radio" name="q5" value="4" /><span>4</span></label>
-        </div>
-        <p class="micro">Stratégies protestataires typiques de la dépendance affective.</p>
-      </section>
-
-      <section class="card question">
-        <header>
-          <p class="eyebrow">6</p>
-          <h2>Je me dévalorise vite si l'autre ne remarque pas mes efforts.</h2>
-        </header>
-        <div class="options">
-          <label><input type="radio" name="q6" value="1" /><span>1</span></label>
-          <label><input type="radio" name="q6" value="2" /><span>2</span></label>
-          <label><input type="radio" name="q6" value="3" /><span>3</span></label>
-          <label><input type="radio" name="q6" value="4" /><span>4</span></label>
-        </div>
-        <p class="micro">Cette question interroge la dépendance narcissique.</p>
-      </section>
-
-      <section class="card question">
-        <header>
-          <p class="eyebrow">7</p>
-          <h2>Je me surprends à surveiller les réseaux sociaux de mes proches pour me rassurer.</h2>
-        </header>
-        <div class="options">
-          <label><input type="radio" name="q7" value="1" /><span>1</span></label>
-          <label><input type="radio" name="q7" value="2" /><span>2</span></label>
-          <label><input type="radio" name="q7" value="3" /><span>3</span></label>
-          <label><input type="radio" name="q7" value="4" /><span>4</span></label>
-        </div>
-        <p class="micro">Le besoin de contrôle révèle souvent un attachement anxieux.</p>
-      </section>
-
-      <section class="card question">
-        <header>
-          <p class="eyebrow">8</p>
-          <h2>Il m'est difficile de demander de l'aide à d'autres que mon/ma partenaire.</h2>
-        </header>
-        <div class="options">
-          <label><input type="radio" name="q8" value="1" /><span>1</span></label>
-          <label><input type="radio" name="q8" value="2" /><span>2</span></label>
-          <label><input type="radio" name="q8" value="3" /><span>3</span></label>
-          <label><input type="radio" name="q8" value="4" /><span>4</span></label>
-        </div>
-        <p class="micro">Plus la réponse est élevée, plus le réseau de soutien est centré sur une seule figure.</p>
-      </section>
-
-      <section class="card results">
-        <h2>Interprète ton score</h2>
-        <ol>
-          <li><strong>8 à 14</strong>&nbsp;: base sécure, dépendance faible. Tu peux tolérer la distance et utiliser plusieurs figures d'attachement.</li>
-          <li><strong>15 à 22</strong>&nbsp;: vigilance élevée. Les représentations des autres oscillent entre confiance et crainte d'abandon.</li>
-          <li><strong>23 à 32</strong>&nbsp;: dépendance affective marquée. Ton système d'alarme relationnel s'active vite.</li>
-        </ol>
-        <p class="micro">Ce test reste auto-déclaratif. En cas de doute, discute des résultats avec un·e professionnel·le.</p>
-      </section>
-
-      <section class="card tips">
-        <h2>Tips &amp; tricks pour te réguler</h2>
-        <ul>
-          <li><strong>Cartographie relationnelle</strong>&nbsp;: note trois personnes-ressources différentes et ce que tu peux leur demander concrètement.</li>
-          <li><strong>Journal des déclencheurs</strong>&nbsp;: consigne les situations où l'alarme de rejet s'active et ce que tu t'es raconté.</li>
-          <li><strong>Pause sensorielle</strong>&nbsp;: avant d'envoyer un message anxieux, connecte-toi à ta respiration 90 secondes.</li>
-          <li><strong>Contrats clairs</strong>&nbsp;: formule avec ton/ta partenaire ce qui te rassure (p. ex. «&nbsp;je réponds sous 3h&nbsp;»).</li>
-          <li><strong>Feedback bienveillant</strong>&nbsp;: ose demander à un proche ce qu'il apprécie chez toi pour réaligner tes représentations.</li>
-        </ul>
+        <p class="micro" id="rangeSummary"></p>
+        <h3>Conséquences probables</h3>
+        <ul class="bullets" id="consequenceList"></ul>
+        <h3>Actions ciblées</h3>
+        <ul class="bullets" id="tipList"></ul>
+        <button class="btn primary" id="restartBtn" type="button">Reprendre le quiz</button>
       </section>
     </main>
 
     <footer class="hero">
-      <p>Tu veux aller plus loin&nbsp;? Reprends ce questionnaire dans un mois après avoir testé les astuces et compare l'évolution de ton score.</p>
+      <p>Reprends ce questionnaire dans un mois après avoir testé les astuces et observe l'évolution de ton score.</p>
     </footer>
+
+    <script>
+      const questions = [
+        {
+          text: "Je me sens en sécurité quand mes proches sont physiquement ou émotionnellement proches de moi.",
+          hint: "Mesure ton besoin de proximité pour te rassurer."
+        },
+        {
+          text: "Je crains souvent qu'on m'abandonne quand quelqu'un ne répond pas rapidement.",
+          hint: "Les personnes dépendantes surévaluent les signes de distance ou de silence."
+        },
+        {
+          text: "Je reformule mentalement chaque interaction pour vérifier si j'ai blessé l'autre.",
+          hint: "Renvoie à des représentations internalisées anxieuses."
+        },
+        {
+          text: "Je me sens incomplet·e sans approbation explicite de ceux que j'aime.",
+          hint: "Explore la régulation de l'estime personnelle via l'autre."
+        },
+        {
+          text: "Quand je sens la distance monter, je multiplie les messages ou les preuves d'amour.",
+          hint: "Stratégies protestataires typiques de la dépendance affective."
+        },
+        {
+          text: "Je me dévalorise vite si l'autre ne remarque pas mes efforts.",
+          hint: "Interroge la dépendance narcissique."
+        },
+        {
+          text: "Je me surprends à surveiller les réseaux sociaux de mes proches pour me rassurer.",
+          hint: "Le besoin de contrôle révèle souvent un attachement anxieux."
+        },
+        {
+          text: "Il m'est difficile de demander de l'aide à d'autres que mon/ma partenaire.",
+          hint: "Plus la réponse est élevée, plus le réseau de soutien est centré sur une seule figure."
+        }
+      ];
+
+      const ranges = [
+        {
+          id: "secure",
+          min: 8,
+          max: 14,
+          label: "Base sécure",
+          summary: "Tu peux tolérer la distance, mobiliser plusieurs figures d'attachement et réguler tes affects sans alerte permanente.",
+          consequences: [
+            "Bonne capacité à demander et recevoir du soutien sans peur de rejet.",
+            "Tu ajustes tes attentes sans sur-interpréter les silences.",
+            "Les séparations sont vécues comme des transitions, pas comme des menaces."
+          ],
+          tips: [
+            "Continue à diversifier tes appuis (amis, famille, pro) pour garder cette flexibilité.",
+            "Partage clairement tes besoins pour maintenir la clarté relationnelle.",
+            "Observe ce qui nourrit ton sentiment de sécurité et ritualise-le."
+          ]
+        },
+        {
+          id: "vigilant",
+          min: 15,
+          max: 22,
+          label: "Vigilance élevée",
+          summary: "Tes représentations oscillent entre confiance et crainte d'abandon ; ton système d'alarme relationnel s'active vite.",
+          consequences: [
+            "Tendance à vérifier, ruminer ou chercher des garanties rapides.",
+            "Hypervigilance aux micro-signaux (délais, nuances de ton).",
+            "Risque d'épuisement ou de tensions si l'autre ne rassure pas assez."
+          ],
+          tips: [
+            "Définis des accords clairs sur la disponibilité (ex : heures de réponse).",
+            "Pratique une pause de 90 secondes respiration/grounding avant d'envoyer un message anxieux.",
+            "Note ce que tu t'es raconté dans les moments de doute et confronte-le aux faits."
+          ]
+        },
+        {
+          id: "dependent",
+          min: 23,
+          max: 32,
+          label: "Dépendance marquée",
+          summary: "Ton système d'alarme relationnel est hyperactivé : forte peur de rejet, besoin fréquent de validation, contrôle ou fusion.",
+          consequences: [
+            "Hyperactivation (messages répétés, surveillance numérique) quand tu perçois de la distance.",
+            "Estime personnelle fortement liée aux retours de l'autre.",
+            "Difficulté à mobiliser d'autres appuis, ce qui renforce le sentiment d'urgence."
+          ],
+          tips: [
+            "Construis un trio de personnes-ressources et répartis tes demandes (émotionnel, pratique, partage).",
+            "Travaille un script de demande rassurante sans contrôle (ex : « Je ressens du stress, peux-tu me répondre ce soir ? »).",
+            "Programme des moments d'auto-apaisement (respiration, mouvement, écriture) avant toute relance.",
+            "Envisage un accompagnement pro pour sécuriser l'attachement et explorer les racines."
+          ]
+        }
+      ];
+
+      const startBtn = document.getElementById('startBtn');
+      const introCard = document.getElementById('introCard');
+      const quizCard = document.getElementById('quizCard');
+      const resultCard = document.getElementById('resultCard');
+      const questionNumber = document.getElementById('questionNumber');
+      const questionText = document.getElementById('questionText');
+      const questionHint = document.getElementById('questionHint');
+      const optionsContainer = document.getElementById('options');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const progressBar = document.getElementById('progressBar');
+      const progressLabel = document.getElementById('progressLabel');
+      const scoreValue = document.getElementById('scoreValue');
+      const scoreMax = document.getElementById('scoreMax');
+      const scoreBadge = document.getElementById('scoreBadge');
+      const rangeSummary = document.getElementById('rangeSummary');
+      const consequenceList = document.getElementById('consequenceList');
+      const tipList = document.getElementById('tipList');
+      const restartBtn = document.getElementById('restartBtn');
+
+      let currentIndex = 0;
+      let answers = Array(questions.length).fill(null);
+      scoreMax.textContent = questions.length * 4;
+
+      function startQuiz() {
+        introCard.hidden = true;
+        resultCard.hidden = true;
+        quizCard.hidden = false;
+        currentIndex = 0;
+        answers = Array(questions.length).fill(null);
+        renderQuestion();
+      }
+
+      function renderQuestion() {
+        const q = questions[currentIndex];
+        questionNumber.textContent = `Question ${currentIndex + 1}`;
+        questionText.textContent = q.text;
+        questionHint.textContent = q.hint;
+        progressLabel.textContent = `Question ${currentIndex + 1}/${questions.length}`;
+        const progress = ((currentIndex) / questions.length) * 100;
+        progressBar.style.width = `${progress}%`;
+
+        optionsContainer.innerHTML = '';
+        for (let value = 1; value <= 4; value++) {
+          const label = document.createElement('label');
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${currentIndex}`;
+          input.value = value;
+          input.checked = answers[currentIndex] === value;
+          input.addEventListener('change', () => {
+            answers[currentIndex] = value;
+            nextBtn.disabled = false;
+          });
+          const span = document.createElement('span');
+          span.textContent = value;
+          label.appendChild(input);
+          label.appendChild(span);
+          optionsContainer.appendChild(label);
+        }
+
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.textContent = currentIndex === questions.length - 1 ? 'Voir le résultat' : 'Question suivante';
+        nextBtn.disabled = answers[currentIndex] === null;
+      }
+
+      function showResults() {
+        const total = answers.reduce((sum, v) => sum + (v || 0), 0);
+        const selectedRange = ranges.find(r => total >= r.min && total <= r.max) || ranges[ranges.length - 1];
+
+        scoreValue.textContent = total;
+        scoreBadge.textContent = selectedRange.label;
+        scoreBadge.className = `badge ${selectedRange.id}`;
+        rangeSummary.textContent = selectedRange.summary;
+
+        consequenceList.innerHTML = '';
+        selectedRange.consequences.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          consequenceList.appendChild(li);
+        });
+
+        tipList.innerHTML = '';
+        selectedRange.tips.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          tipList.appendChild(li);
+        });
+
+        progressBar.style.width = '100%';
+        progressLabel.textContent = 'Terminé';
+        quizCard.hidden = true;
+        resultCard.hidden = false;
+      }
+
+      function goNext() {
+        if (answers[currentIndex] === null) return;
+        if (currentIndex === questions.length - 1) {
+          showResults();
+        } else {
+          currentIndex += 1;
+          renderQuestion();
+        }
+      }
+
+      function goPrev() {
+        if (currentIndex === 0) return;
+        currentIndex -= 1;
+        renderQuestion();
+      }
+
+      function restartQuiz() {
+        introCard.hidden = false;
+        quizCard.hidden = true;
+        resultCard.hidden = true;
+        currentIndex = 0;
+        answers = Array(questions.length).fill(null);
+      }
+
+      startBtn.addEventListener('click', startQuiz);
+      nextBtn.addEventListener('click', goNext);
+      prevBtn.addEventListener('click', goPrev);
+      restartBtn.addEventListener('click', restartQuiz);
+    </script>
   </body>
 </html>
