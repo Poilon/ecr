@@ -63,6 +63,13 @@
         <h3>Actions ciblées</h3>
         <ul class="bullets" id="tipList"></ul>
 
+        <h3>Ressources pour aller plus loin</h3>
+        <ul class="bullets">
+          <li><a href="https://en.wikipedia.org/wiki/Attachment_theory" target="_blank" rel="noreferrer">Wikipedia · Attachment theory</a> — panorama complet des styles d'attachement.</li>
+          <li><a href="https://www.simplypsychology.org/attachment.html" target="_blank" rel="noreferrer">SimplyPsychology · Attachment</a> — synthèse claire des styles et de leurs effets en adulte.</li>
+          <li><a href="https://en.wikipedia.org/wiki/Codependency" target="_blank" rel="noreferrer">Wikipedia · Codependency</a> — repères sur la dépendance affective et les stratégies de sortie.</li>
+        </ul>
+
         <h3>Zones sensibles prioritaires</h3>
         <div class="insights" id="themeInsights"></div>
 
@@ -450,10 +457,32 @@
         answers = Array(questions.length).fill(null);
       }
 
+      function handleKeydown(event) {
+        const isQuizVisible = !quizCard.hidden;
+        const isResultVisible = !resultCard.hidden;
+
+        if (isQuizVisible && ['1', '2', '3', '4'].includes(event.key)) {
+          const targetValue = event.key;
+          const input = optionsContainer.querySelector(`input[value=\"${targetValue}\"]`);
+          if (input) {
+            input.click();
+          }
+        }
+
+        if (event.key === 'Enter') {
+          if (isQuizVisible && !nextBtn.disabled) {
+            goNext();
+          } else if (isResultVisible) {
+            restartQuiz();
+          }
+        }
+      }
+
       startBtn.addEventListener('click', startQuiz);
       nextBtn.addEventListener('click', goNext);
       prevBtn.addEventListener('click', goPrev);
       restartBtn.addEventListener('click', restartQuiz);
+      document.addEventListener('keydown', handleKeydown);
     </script>
   </body>
 </html>

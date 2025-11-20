@@ -29,6 +29,16 @@ body {
   padding-bottom: 2rem;
 }
 
+a {
+  color: #9df7e5;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+a:hover {
+  color: #c9fff4;
+}
+
 .hero {
   max-width: 920px;
   margin: 0 auto;
