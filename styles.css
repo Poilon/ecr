@@ -1,14 +1,16 @@
 :root {
-  color-scheme: light dark;
-  --bg: #f4f6fb;
-  --card: #ffffff;
-  --text: #152238;
-  --muted: #5d6a85;
-  --accent: #1f7ae0;
-  --accent-soft: rgba(31, 122, 224, 0.1);
-  --success: #1db954;
-  --danger: #d7263d;
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color-scheme: light;
+  --bg: #0f172a;
+  --bg-soft: #111827;
+  --card: rgba(255, 255, 255, 0.04);
+  --card-stroke: rgba(255, 255, 255, 0.12);
+  --text: #e8edf7;
+  --muted: #9fb1d3;
+  --accent: #7cf1d8;
+  --accent-2: #6f8cf7;
+  --accent-soft: rgba(124, 241, 216, 0.08);
+  --ring: rgba(124, 241, 216, 0.35);
+  font-family: 'Space Grotesk', 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 * {
@@ -18,9 +20,13 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--bg);
+  background:
+    radial-gradient(circle at 15% 20%, rgba(124, 241, 216, 0.1), transparent 35%),
+    radial-gradient(circle at 85% 15%, rgba(111, 140, 247, 0.12), transparent 30%),
+    linear-gradient(160deg, var(--bg) 0%, var(--bg-soft) 40%, #0b1222 100%);
   color: var(--text);
   line-height: 1.6;
+  padding-bottom: 2rem;
 }
 
 .hero {
@@ -28,11 +34,13 @@ body {
   margin: 0 auto;
   padding: 2.5rem 1.5rem;
   text-align: center;
+  position: relative;
 }
 
 .hero h1 {
   margin: 0.25rem 0 1rem;
   font-size: clamp(2rem, 5vw, 2.8rem);
+  letter-spacing: -0.02em;
 }
 
 .hero p {
@@ -50,15 +58,28 @@ body {
 }
 
 .card {
+  position: relative;
+  overflow: hidden;
   background: var(--card);
+  border: 1px solid var(--card-stroke);
   border-radius: 1.2rem;
-  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
   padding: 1.75rem;
+  backdrop-filter: blur(10px);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 20% 15%, rgba(124, 241, 216, 0.18), transparent 35%);
 }
 
 .card header h2 {
   margin-top: 0.35rem;
   font-size: 1.35rem;
+  letter-spacing: -0.01em;
 }
 
 .eyebrow {
@@ -82,7 +103,7 @@ body {
 }
 
 .options label span {
-  border: 1.5px solid rgba(31, 122, 224, 0.25);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
   border-radius: 0.9rem;
   padding: 0.85rem 0;
   display: flex;
@@ -90,7 +111,8 @@ body {
   justify-content: center;
   font-weight: 600;
   color: var(--muted);
-  transition: border-color 0.2s, transform 0.2s, background 0.2s, color 0.2s;
+  background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.2s, transform 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
 .options input {
@@ -101,16 +123,17 @@ body {
 .options label:hover span {
   border-color: var(--accent);
   transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
 }
 
 .options input:checked + span {
   border-color: var(--accent);
-  background: var(--accent-soft);
-  color: var(--accent);
+  background: linear-gradient(120deg, rgba(124, 241, 216, 0.15), rgba(111, 140, 247, 0.12));
+  color: var(--text);
 }
 
 .options input:focus-visible + span {
-  outline: 3px solid rgba(31, 122, 224, 0.35);
+  outline: 3px solid var(--ring);
   outline-offset: 3px;
 }
 
@@ -135,8 +158,8 @@ body {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: var(--accent-soft);
-  color: var(--accent);
+  background: rgba(111, 140, 247, 0.14);
+  color: #dce6ff;
   align-items: center;
   justify-content: center;
   font-weight: 600;
@@ -148,6 +171,7 @@ body {
   padding-left: 1.25rem;
   color: var(--muted);
   font-size: 0.95rem;
+  line-height: 1.8;
 }
 
 .results li {
@@ -157,6 +181,7 @@ body {
 .tips ul {
   padding-left: 1.1rem;
   color: var(--muted);
+  line-height: 1.7;
 }
 
 .tips li {
